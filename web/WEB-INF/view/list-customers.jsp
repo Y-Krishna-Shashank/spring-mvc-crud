@@ -24,9 +24,7 @@
         <input type = "button" value = "Add Customer"
         onclick="window.location.href='addCustomer'; return false;" class = "add-button"/>
         <table>
-            <c:url var = "updateLink" value="/customer/showFormForUpdate">
-                <c:param name = "customerId" value ="${tempCustomer.id}"/>
-            </c:url>
+
             <tr>
                 <th> First Name</th>
                 <th> Last Name</th>
@@ -34,6 +32,12 @@
 
             </tr>
             <c:forEach var = "tempCustomer" items = "${customers}">
+                <c:url var = "updateLink" value="/customer/showFormForUpdate">
+                <c:param name = "customerId" value ="${tempCustomer.id}"/>
+                </c:url>
+                <c:url var = "deleteLink" value="/customer/delete">
+                <c:param name = "customerId" value ="${tempCustomer.id}"/>
+                </c:url>
 <tr>
     <td>${tempCustomer.firstName}</td>
     <td>${tempCustomer.lastName}</td>

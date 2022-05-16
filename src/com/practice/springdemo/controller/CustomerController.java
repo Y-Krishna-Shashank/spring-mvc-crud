@@ -1,29 +1,26 @@
 package com.practice.springdemo.controller;
 import java.util.List;
 
+import com.practice.springdemo.entity.Customer;
+import com.practice.springdemo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.practice.springdemo.entity.Customer;
-import com.practice.springdemo.service.CustomerService;
+
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 
     // need to inject our customer service
-   @Autowired
-   private CustomerService customerService;
-
-   /*  both are same here @autowired means this only
-   private final CustomerService customerService;
-
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
-    */
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping("/list")
     public String listCustomers(Model theModel) {
@@ -37,7 +34,7 @@ public class CustomerController {
         return "list-customers";
     }
 
-    @GetMapping("/addCustomer")
+    @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
 
         // create model attribute to bind form data
@@ -53,7 +50,6 @@ public class CustomerController {
 
         // save the customer using our service
         customerService.saveCustomer(theCustomer);
-
 
         return "redirect:/customer/list";
     }
@@ -71,14 +67,10 @@ public class CustomerController {
         // send over to our form
         return "customer-form";
     }
-
-    @DeleteMapping("/delete")
+    @GetMapping("/delete")
     public String deleteCustomer(@RequestParam("customerId") int theId) {
-
-        // delete the customer
         customerService.deleteCustomer(theId);
-
-        return "redirect:/customer/list";
+    return "redirect:/customer/list";
     }
 }
 
