@@ -19,7 +19,7 @@
 	<aop:aspectj-autoproxy/>
 	<!-- Add support for conversion, formatting and validation support -->
 	<mvc:annotation-driven/>
-	<!-- Add support for component scanning -->
+	<!-- Add support for component scanning -->gi
 	<context:component-scan base-package="com.practice.springdemo" />
 
 
